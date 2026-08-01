@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/Common/">
+    <Project Path="API.Template.Common/API.Template.Common.csproj" />
+  </Folder>
+  <Project Path="API.Template.Application/API.Template.Application.csproj" />
+  <Project Path="API.Template.Domain/API.Template.Domain.csproj" />
+  <Project Path="API.Template.Infra.Persistence/API.Template.Infra.Persistence.csproj" />
+  <Project Path="API.Template.Infrastructure/API.Template.Infrastructure.csproj" />
+  <Project Path="API.Template.Test/API.Template.Test.csproj" />
+  <Project Path="API.Template.WebApi/API.Template.WebApi.csproj" />
+</Solution>
