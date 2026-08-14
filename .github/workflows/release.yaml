@@ -1,0 +1,30 @@
+name: Build and Deploy .NET API
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '9.0.x'
+
+    - name: Find and Publish API
+      run: |
+        # Automatically find the WebApi csproj file anywhere in the repo
+        CSPROJ_PATH=$(find . -name "*.WebApi.csproj" | head -n 1)
+        echo "Found project: $CSPROJ_PATH"
+        dotnet publish "$CSPROJ_PATH" --configuration Release --output ./myapp -p:EnvironmentName=Staging
+
+    - name: Deploy to Azure App Service
+      uses: azure/webapps-deploy@v3
+      with:
+        app-name: 'app-api-template-dev-centralindia'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ./myapp
