@@ -5,6 +5,7 @@
   <Project Path="API.Template.Application/API.Template.Application.csproj" />
   <Project Path="API.Template.Core/API.Template.Core.csproj" Id="c8454599-0a0c-4505-b0f4-77541e289758" />
   <Project Path="API.Template.Domain/API.Template.Domain.csproj" />
+  <Project Path="API.Template.Identity/API.Template.Identity.csproj" />
   <Project Path="API.Template.Infra.Persistence/API.Template.Infra.Persistence.csproj" />
   <Project Path="API.Template.Infrastructure/API.Template.Infrastructure.csproj" />
   <Project Path="API.Template.Test/API.Template.Test.csproj" />

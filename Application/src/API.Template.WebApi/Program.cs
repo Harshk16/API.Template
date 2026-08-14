@@ -1,10 +1,13 @@
+using API.Template.Application;
+using API.Template.Identity;
 using API.Template.Infrastructure.Configuration.Adapters;
 using API.Template.Infrastructure.Configuration.Extensions;
 using API.Template.Infrastructure.Configuration.Options;
 using API.Template.Infrastructure.DI;
-using API.Template.Application;
+using API.Template.WebApi.Objects;
 using Azure.Identity;
 using Infrastructure.Persistence.Configuration;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,10 +25,18 @@ builder.Configuration.AddDatabaseSettings();
 
 builder.Services.AddAllApplicationServices();                          // Application: MediatR
 builder.Services.AddAllConfigurationServices(builder.Configuration);   // Infra: keys/settings
-//builder.Services.AddInfrastructureServices(builder.Configuration);     // Infra: db/email/blob — depends on line above
+builder.Services.AddInfrastructureServices(builder.Configuration);     // Infra: db/email/blob — depends on line above
+
+builder.Services.AddIdentityServices(builder.Configuration, builder.Environment); // ← added builder.Environment
+
+// builder.Services.AddHttpContextAccessor(); // confirmed redundant — AddIdentity already registers this internally; left commented, not deleted, for clarity
+builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add(new AuthorizeFilter());
+});
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -44,7 +55,8 @@ app.UseSwagger();
 app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
-
+app.UseHsts();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

@@ -1,8 +1,10 @@
 ﻿using API.Template.Application.Interfaces;
 using API.Template.Core.Extensions;
+using API.Template.Infra.Persistence.Contexts;
 using API.Template.Infrastructure.Configuration.Options;
 using API.Template.Infrastructure.Configuration.Validation;
 using FluentValidation;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
 using Microsoft.Extensions.DependencyInjection;
@@ -20,17 +22,17 @@ namespace API.Template.Infrastructure.DI
 
         public static IServiceCollection AddInfrastructureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            //services.AddDbContext<AppDbContext>((sp, options) =>
-            //{
-            //    var keys = sp.GetRequiredService<IKeys>();
-            //    var settings = sp.GetRequiredService<ISettings>();
+            services.AddDbContext<AppDbContext>((sp, options) =>
+            {
+                var keys = sp.GetRequiredService<IKeys>();
+                var settings = sp.GetRequiredService<ISettings>();
 
-            //    options.UseSqlServer(keys.DatabaseConnectionString, sql =>
-            //    {
-            //        sql.CommandTimeout(settings.DbCommandTimeoutSeconds);
-            //        sql.EnableRetryOnFailure(3);
-            //    });
-            //});
+                options.UseSqlServer(keys.DatabaseConnectionString, sql =>
+                {
+                    sql.CommandTimeout(settings.DbCommandTimeoutSeconds);
+                    sql.EnableRetryOnFailure(3);
+                });
+            });
 
             //services.AddSingleton<IEmailService, EmailService>();
             //services.AddSingleton<IBlobService, BlobService>();

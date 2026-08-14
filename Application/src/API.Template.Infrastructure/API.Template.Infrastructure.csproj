@@ -20,6 +20,7 @@
     <ProjectReference Include="..\API.Template.Application\API.Template.Application.csproj" />
     <ProjectReference Include="..\API.Template.Core\API.Template.Core.csproj" />
     <ProjectReference Include="..\API.Template.Domain\API.Template.Domain.csproj" />
+    <ProjectReference Include="..\API.Template.Infra.Persistence\API.Template.Infra.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
