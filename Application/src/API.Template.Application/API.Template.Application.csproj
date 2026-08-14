@@ -22,7 +22,6 @@
   <ItemGroup>
     <ProjectReference Include="..\API.Template.Common\API.Template.Common.csproj" />
     <ProjectReference Include="..\API.Template.Domain\API.Template.Domain.csproj" />
-    <ProjectReference Include="..\API.Template.Infra.Persistence\API.Template.Infra.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
