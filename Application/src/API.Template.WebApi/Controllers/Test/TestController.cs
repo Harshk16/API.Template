@@ -1,5 +1,6 @@
 ﻿using API.Template.Application.Common.Models;
 using API.Template.Application.Interfaces;
+using API.Template.Application.Modules.Users.Dtos;
 using API.Template.Identity;
 using API.Template.Identity.Interfaces;
 using API.Template.Infrastructure.Configuration.Options;
@@ -102,6 +103,18 @@ namespace API.Template.WebApi.Controllers.Test
                 return "[MASKED]";
 
             return $"{value.Substring(0, 4)}...{value.Substring(value.Length - 4)}";
+        }
+
+        [HttpPost()]
+        [AllowAnonymous]
+        public async Task<IActionResult> CreateUser([FromBody] UserCreateDto dto)
+        {
+            var result = await _identityService.CreateUserAsync(dto.Email, dto.Password, dto.FirstName, dto.LastName);
+
+            if (!result.Succeeded)
+                return BadRequest(new { errors = result.Errors });
+
+            return Ok(new { userId = result.UserId });
         }
 
         [HttpPost]
