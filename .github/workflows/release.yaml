@@ -20,7 +20,7 @@ jobs:
         # Automatically find the WebApi csproj file anywhere in the repo
         CSPROJ_PATH=$(find . -name "*.WebApi.csproj" | head -n 1)
         echo "Found project: $CSPROJ_PATH"
-        dotnet publish "$CSPROJ_PATH" --configuration Release --output ./myapp -p:EnvironmentName=Staging
+        dotnet publish "$CSPROJ_PATH" --configuration Release --output ./myapp -p:EnvironmentName=Dev
 
     - name: Deploy to Azure App Service
       uses: azure/webapps-deploy@v3
