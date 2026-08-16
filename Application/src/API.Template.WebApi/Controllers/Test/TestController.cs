@@ -34,6 +34,7 @@ namespace API.Template.WebApi.Controllers.Test
         }
 
         [HttpGet("database")]
+        [AllowAnonymous]
         public IActionResult GetDatabaseConfiguration()
         {
             return Ok(_databaseOptions);
@@ -44,6 +45,7 @@ namespace API.Template.WebApi.Controllers.Test
         /// Sensitive keys are masked for security
         /// </summary>
         [HttpGet("config-and-keys")]
+        [AllowAnonymous]
         public IActionResult LoadKeysAndSettings()
         {
             try
