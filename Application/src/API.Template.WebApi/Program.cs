@@ -51,6 +51,9 @@ var app = builder.Build();
 //    app.UseSwaggerUI();
 //}
 
+if (app.Environment.EnvironmentName == "Dev")
+    app.UseDeveloperExceptionPage();
+
 app.UseSwagger();
 app.UseSwaggerUI();
 

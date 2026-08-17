@@ -33,7 +33,7 @@ namespace API.Template.WebApi.Controllers.Test
             _currentUser = currentUser;
         }
 
-        [HttpGet("database")]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult GetDatabaseConfiguration()
         {
@@ -44,7 +44,7 @@ namespace API.Template.WebApi.Controllers.Test
         /// Load and return IKeys and ISettings for testing purposes
         /// Sensitive keys are masked for security
         /// </summary>
-        [HttpGet("config-and-keys")]
+        [HttpGet]
         [AllowAnonymous]
         public IActionResult LoadKeysAndSettings()
         {
