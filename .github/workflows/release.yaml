@@ -2,7 +2,7 @@ name: Build and Deploy .NET API
 
 on:
   push:
-    branches: [ "release" ]
+    branches: [ "release_docker" ]
 
 jobs:
   build-and-deploy:
@@ -25,7 +25,7 @@ jobs:
     - name: Deploy to Azure App Service
       uses: azure/webapps-deploy@v3
       with:
-        app-name: 'az-api-template-dev'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        app-name: 'api-template-dev-docker'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE_docker }}
         package: ${{ github.workspace }}/myapp
 
